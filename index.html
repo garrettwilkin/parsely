@@ -11,8 +11,12 @@
       var params = {limit:9, sort:'title'};
       analytics.posts(key,params,function(data) {
         if (data.success != false) {
-          console.log(data);
-          $('#analyticsPosts').text(data.data[0].title);
+          var results = 'Titles:<p><ol>';
+          for(var i=0; i < data.data.length; i++) {
+            results += '<li>'+data.data[i].title+'</li>';
+          };
+          results += '</ol>';
+          $('#analyticsPosts').html(results);
         } else {
           $('#analyticsPosts').text('error');
           console.log(data);
@@ -22,8 +26,12 @@
       //Request authors.
       analytics.authors(key,params,function(data) {
         if (data.success != false) {
-          console.log(data);
-          $('#analyticsAuthors').text(data.data[0].title);
+          var results = 'Authors:<p><ol>';
+          for(var i=0; i < data.data.length; i++) {
+            results += '<li>'+data.data[i].author+'</li>';
+          };
+          results += '</ol>';
+          $('#analyticsAuthors').html(results);
         } else {
           $('#analyticsAuthors').text('error');
           console.log(data);

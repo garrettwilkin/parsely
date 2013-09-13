@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+    <script src="parsely.js"></script>
+    <script>
+      var analytics = new Parsely.analytics();
+      analytics.posts(function(data) {
+        if (data.success) {
+          console.log(data);
+          var count = data.data.length;
+          $('#analytics').text(data.data[0].title);
+        } else {
+          console.log(data);
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <div id="analytics"></div>
+  </body>
+</html>

@@ -6,14 +6,26 @@ var Parsely = function() {
   var root = 'http://api.parsely.com/v2/';
   //public
   var p = {};
-  p.apikey = "blog.parsely.com";
-
+  
   p.analytics = function () {
     var url = root + 'analytics/';
 
-    this.posts = function(callback) {
-      $.getJSON(url+'posts?apikey='+p.apikey+'&callback=?',callback);
+    this.posts = function(key,params,callback) {
+      var params = jQuery.param(params);
+      if (params != '') {
+        params = '&' + params;
+      }
+      $.getJSON(url+'posts?apikey='+key+params+'&callback=?',callback);
+    };
+
+    this.authors = function(key,params,callback) {
+      var params = jQuery.param(params);
+      if (params != '') {
+        params = '&' + params;
+      }
+      $.getJSON(url+'authors?apikey='+key+params+'&callback=?',callback);
     };
   };
+
   return p;
 }();

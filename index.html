@@ -1,21 +1,39 @@
 <html>
   <head>
+    <title>Parsely JS API client tests</title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
     <script src="parsely.js"></script>
     <script>
-      var analytics = new Parsely.analytics();
-      analytics.posts(function(data) {
-        if (data.success) {
+      var key = 'blog.parsely.com',
+          analytics = new Parsely.analytics();
+
+      //Request 9 posts, sort by title.
+      var params = {limit:9, sort:'title'};
+      analytics.posts(key,params,function(data) {
+        if (data.success != false) {
           console.log(data);
-          var count = data.data.length;
-          $('#analytics').text(data.data[0].title);
+          $('#analyticsPosts').text(data.data[0].title);
         } else {
+          $('#analyticsPosts').text('error');
           console.log(data);
         }
       });
+
+      //Request authors.
+      analytics.authors(key,params,function(data) {
+        if (data.success != false) {
+          console.log(data);
+          $('#analyticsAuthors').text(data.data[0].title);
+        } else {
+          $('#analyticsAuthors').text('error');
+          console.log(data);
+        }
+      });
+
     </script>
   </head>
   <body>
-    <div id="analytics"></div>
+    <div id="analyticsPosts"></div>
+    <div id="analyticsAuthors"></div>
   </body>
 </html>

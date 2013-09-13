@@ -3,6 +3,15 @@ Parsely
 
 A Parsely javascript client for the browser.
 
+Example
+=======
+Here's how to use the client to request 9 posts & sort by title:
+```
+  var analytics = new Parsely.analytics();
+  analytics.posts(key,{limit:9, sort:'title'},callback}
+```
+  
+
 Install
 =======
 
